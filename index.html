@@ -80,7 +80,7 @@
                             <label for="message">Message</label>
                             <textarea class="form-control" id="message" name="message" rows="3" required>this is a demo message in the form. It could be anything where the user is identified, including a login or signup form</textarea>
                         </div>
-                        <button type="button" class="btn btn-primary" onclick="cioanalytics.identify(document.getElementById('email').value, { name: document.getElementById('name').value, message: document.getElementById('message').value });">Submit</button>
+                        <button type="button" class="btn btn-primary" onclick="const email = document.getElementById('email').value; const name = document.getElementById('name').value; const message = document.getElementById('message').value; const request = { name, message }; cioanalytics.identify(email, request, (response) => showSuccessModal(request, response));">Submit</button>
                     </form>
                 </div>
             </section>
