@@ -187,19 +187,22 @@
                 document.body.appendChild(modalContainer);
             }
 
-            document.querySelector('.btn-primary[onclick^="cioanalytics.track"]')?.addEventListener('click', () => {
-                const request = {
-                    title: 'How to use Customer.io',
-                    progress: '2%',
-                    category: 'getting started'
-                };
-
-                cioanalytics.track('class_started', request, (response) => {
-                    showSuccessModal(request, response);
-                });
-            });
-
             document.addEventListener('DOMContentLoaded', () => {
+                const trackButton = document.querySelector('.btn-primary[onclick^="cioanalytics.track"]');
+                if (trackButton) {
+                    trackButton.onclick = () => {
+                        const request = {
+                            title: 'How to use Customer.io',
+                            progress: '2%',
+                            category: 'getting started'
+                        };
+
+                        cioanalytics.track('class_started', request, (response) => {
+                            showSuccessModal(request, response);
+                        });
+                    };
+                }
+
                 const userIdElement = document.getElementById('user-id');
                 const userId = cioanalytics.user().id();
                 userIdElement.textContent = userId ? `User ID: ${userId}` : 'No user identified.';
