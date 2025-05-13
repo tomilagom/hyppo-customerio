@@ -32,3 +32,19 @@ window.addEventListener('DOMContentLoaded', event => {
     });
 
 });
+
+function handleFeedbackSubmit(event) {
+    event.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    analytics.identify('user_' + name, {
+        name: name,
+        email: email,
+        message: message
+    });
+
+    alert('Feedback submitted successfully!');
+    document.getElementById('feedbackForm').reset();
+}
