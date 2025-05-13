@@ -84,6 +84,14 @@
                     </form>
                 </div>
             </section>
+            <section class="resume-section" id="user-info">
+                <div class="resume-section-content">
+                    <h4>Current Identified User</h4>
+                    <button class="btn btn-secondary" onclick="const userId = cioanalytics.user().id(); document.getElementById('user-id').textContent = userId ? `User ID: ${userId}` : 'No user identified.';">Show User ID</button>
+                    <button class="btn btn-danger" onclick="cioanalytics.reset(); document.getElementById('user-id').textContent = 'No user identified.';">Logout</button>
+                    <p id="user-id">Click the button to see the user ID.</p>
+                </div>
+            </section>
             <footer class="footer text-center">
                 <p>Hyppo demos — Hyper Growth Agency for Latin America</p>
             </footer>
@@ -178,6 +186,12 @@
                 cioanalytics.track('class_started', request, (response) => {
                     showSuccessModal(request, response);
                 });
+            });
+
+            document.addEventListener('DOMContentLoaded', () => {
+                const userIdElement = document.getElementById('user-id');
+                const userId = cioanalytics.user().id();
+                userIdElement.textContent = userId ? `User ID: ${userId}` : 'No user identified.';
             });
         </script>
         <!-- Bootstrap core JS-->
