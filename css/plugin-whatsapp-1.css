@@ -47,7 +47,7 @@
     color: #ffffff;
     z-index: 9999999999;
     transition: 0.3s ease;
-    background:url("../img/Whatsapp/fondoWhatsapp.png");
+    background:url("../assets/img/fondoWhatsapp.png");
 }
 
 .plugin-whatsapp-titulo{
