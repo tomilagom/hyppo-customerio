@@ -128,8 +128,7 @@
                     var phone="16467626011";
                     if($("#mensajeWhatsapp").val()!="") {
                         var message = '"Ask from the web": ' + $("#mensajeWhatsapp").val();
-        
-                        window.open("https://api.whatsapp.com/send?phone=" + phone + "&text=" + message, "", "_blank");
+                                window.open("https://api.whatsapp.com/send?phone=" + phone + "&text=" + message);
                     }else
                         alert("You can't send a blank message.");
                 });
