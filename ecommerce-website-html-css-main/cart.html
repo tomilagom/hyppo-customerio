@@ -12,7 +12,21 @@
 
     <!-- custom css file link -->
     <link rel="stylesheet" href="style.css">
-
+    <script>
+        !function(){var i="cioanalytics", analytics=(window[i]=window[i]||[]);if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.setAttribute('data-global-customerio-analytics-key', i);t.src="https://cdp.customer.io/v1/analytics-js/snippet/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._writeKey=key;analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.15.3";
+            analytics.load(
+            "0be865e18f0402b04a77",
+            {
+                "integrations": {
+                "Customer.io In-App Plugin": {
+                    siteId: "290bacec6d019e2a0284"
+                }
+                }
+            }
+            );
+            analytics.page();
+        }}();
+        </script>
 </head>
 
 <body>
@@ -21,10 +35,7 @@
         <a href="#"><img src="images/logo.png" class="logo" alt=""></a>
         <div>
             <ul id="navbar">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="shop.html">Shop</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="about.html">About</a></li>
+                <li><a href="index.html">Shop</a></li>
                 <li><a href="contact.html">Contact</a></li>
                 <li id="lg-bag"><a class="active" href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
                 <a href="#" id="close"><i class="far fa-times"></i></a>
@@ -64,8 +75,8 @@
             <h3>Apply Coupon</h3>
             <div style="display: flex; gap: 0.5rem; align-items: center;">
                 <input type="text" placeholder="Enter Your Coupon">
-                <button class="normal">Apply</button>
-                <button id="remove-coupon" class="normal" style="display:none;background:#e74c3c;color:#fff;">Remove</button>
+                <button class="normal" onclick="cioanalytics.track('apply-coupon', {}, (response) => showSuccessModal({ event: 'apply-coupon' }, response));">Apply</button>
+                <button id="remove-coupon" class="normal" style="display:none;background:#e74c3c;color:#fff;" onclick="cioanalytics.track('remove-coupon', {}, (response) => showSuccessModal({ event: 'remove-coupon' }, response));">Remove</button>
             </div>
         </div>
         <div class="subtotal">
@@ -95,7 +106,7 @@
                 </form>
             </div>
             <div id="user-greeting" style="margin-top:1rem;display:none;"></div>
-            <button id="logout-btn" class="normal" style="display:none;margin-top:0.5rem;background:#e74c3c;color:#fff;">Logout</button>
+            <button id="logout-btn" class="normal" style="display:none;margin-top:0.5rem;background:#e74c3c;color:#fff;" onclick="cioanalytics.reset(); cioanalytics.track('logout', {}, (response) => showSuccessModal({ event: 'logout' }, response)); showGreeting();">Logout</button>
         </div>
     </section>
 
@@ -213,10 +224,13 @@
             }
         }
         function isLoggedIn() {
-            return !!localStorage.getItem('cart_user_email');
+            // Use unified 'user' key for login state
+            return !!localStorage.getItem('user');
         }
         function getUserEmail() {
-            return localStorage.getItem('cart_user_email') || '';
+            // Use unified 'user' key for login state
+            const user = localStorage.getItem('user');
+            return user ? JSON.parse(user).email : '';
         }
         function showGreeting() {
             const greeting = document.getElementById('user-greeting');
@@ -287,6 +301,21 @@
                     e.preventDefault();
                     document.getElementById('login-modal').style.display = 'flex';
                 } else {
+                    // Gather order details
+                    const cart = getCart();
+                    const couponInput = document.querySelector('.coupon input');
+                    const coupon = couponInput ? couponInput.value.trim() : '';
+                    const orderDetails = {
+                        products: cart.map(item => ({
+                            id: item.id,
+                            name: item.name,
+                            price: item.price,
+                            qty: item.qty,
+                            img: item.img
+                        })),
+                        coupon: coupon
+                    };
+                    cioanalytics.track('checkout', orderDetails, (response) => showSuccessModal({ event: 'checkout', order: orderDetails }, response));
                     alert('Proceeding to checkout! (Demo only)');
                 }
             });
@@ -295,14 +324,15 @@
                 e.preventDefault();
                 const email = document.getElementById('login-email').value;
                 // Password is ignored, always valid
-                localStorage.setItem('cart_user_email', email);
+                localStorage.setItem('user', JSON.stringify({ email: email }));
+                cioanalytics.identify(email, {}, (response) => showSuccessModal({ event: 'identify-login' }, response));
                 document.getElementById('login-modal').style.display = 'none';
                 showGreeting();
                 alert('Login successful! You can now checkout.');
             });
             // Logout button logic
             document.getElementById('logout-btn').addEventListener('click', function() {
-                localStorage.removeItem('cart_user_email');
+                localStorage.removeItem('user');
                 showGreeting();
                 alert('You have been logged out.');
             });
@@ -312,6 +342,21 @@
                     this.style.display = 'none';
                 }
             });
+            // Newsletter signup logic
+            var newsletterSignupBtn = document.getElementById('newsletter-signup');
+            if (newsletterSignupBtn) {
+                newsletterSignupBtn.addEventListener('click', function() {
+                    var email = document.getElementById('newsletter-email').value.trim();
+                    if (email) {
+                        cioanalytics.identify(email, {}, (response) => showSuccessModal({ event: 'identify-newsletter' }, response));
+                        localStorage.setItem('user', JSON.stringify({ email: email }));
+                        alert('Signed up and logged in as ' + email + '!');
+                        showUserEmail();
+                    } else {
+                        alert('Please enter your email address.');
+                    }
+                });
+            }
         });
     </script>
 </body>

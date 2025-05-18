@@ -12,7 +12,21 @@
 
     <!-- custom css file link -->
     <link rel="stylesheet" href="style.css">
-
+<script>
+        !function(){var i="cioanalytics", analytics=(window[i]=window[i]||[]);if(!analytics.initialize)if(analytics.invoked)window.console&&console.error&&console.error("Snippet included twice.");else{analytics.invoked=!0;analytics.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"];analytics.factory=function(e){return function(){var t=Array.prototype.slice.call(arguments);t.unshift(e);analytics.push(t);return analytics}};for(var e=0;e<analytics.methods.length;e++){var key=analytics.methods[e];analytics[key]=analytics.factory(key)}analytics.load=function(key,e){var t=document.createElement("script");t.type="text/javascript";t.async=!0;t.setAttribute('data-global-customerio-analytics-key', i);t.src="https://cdp.customer.io/v1/analytics-js/snippet/" + key + "/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(t,n);analytics._writeKey=key;analytics._loadOptions=e};analytics.SNIPPET_VERSION="4.15.3";
+            analytics.load(
+            "0be865e18f0402b04a77",
+            {
+                "integrations": {
+                "Customer.io In-App Plugin": {
+                    siteId: "290bacec6d019e2a0284"
+                }
+                }
+            }
+            );
+            analytics.page();
+        }}();
+        </script>
 </head>
 
 <body>
@@ -21,12 +35,9 @@
         <a href="#"><img src="images/logo.png" class="logo" alt=""></a>
         <div>
             <ul id="navbar">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="shop.html">Shop</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a class="active" href="contact.html">Contact</a></li>
-                <li id="lg-bag"><a href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+                <li><a href="/index.html">Main Demo</a></li>
+                <li><a class="active" href="index.html">Shop</a></li>
+                <li><a href="contact.html">Contact</a></li>
                 <a href="#" id="close"><i class="far fa-times"></i></a>
             </ul>
         </div>
@@ -49,19 +60,19 @@
             <div>
                 <li>
                     <i class="fas fa-map"></i>
-                    <p>Lahore, Pakistan 54840</p>
+                    <p>Buenos Aires, Argentina 1000</p>
                 </li>
                 <li>
                     <i class="fas fa-envelope"></i>
-                    <p>connectwithmawais@gmail.com</p>
+                    <p>contact@bairescompany.com</p>
                 </li>
                 <li>
                     <i class="fas fa-phone-alt"></i>
-                    <p>+92-321-4655990
+                    <p>+54 11 1234-5678</p>
                 </li>
                 <li>
                     <i class="fas fa-clock"></i>
-                    <p>Monday to Saturday: 9:00 AM to 16:00 PM</p>
+                    <p>Monday to Friday: 9:00 AM to 6:00 PM</p>
                 </li>
             </div>
         </div>
@@ -78,10 +89,10 @@
             <span>LEAVE A MESSAGE</span>
             <h2>We love to hear from you</h2>
             <input type="text" placeholder="Your Name">
-            <input type="text" placeholder="E-mail">
+            <input type="text" placeholder="E-mail" id="contact-email" onblur="if(this.value)cioanalytics.identify(this.value, {}, (response) => showSuccessModal({ event: 'identify-contact' }, response));">
             <input type="text" placeholder="Subject">
             <textarea name="" id="" cols="30" rows="10" placeholder="Your Message"></textarea>
-            <button class="normal">Submit</button>
+            <button class="normal" onclick="cioanalytics.track('contact-submit', {}, (response) => showSuccessModal({ event: 'contact-submit' }, response));">Submit</button>
         </form>
         <div class="people">
             <div>
@@ -105,8 +116,8 @@
             <p>Get E-mail updates about our latest shop and <span>special offers.</span></p>
         </div>
         <div class="form">
-            <input type="text" placeholder="Your email address">
-            <button class="normal">Sign Up</button>
+            <input type="text" placeholder="Your email address" id="newsletter-email-contact" onblur="if(this.value)cioanalytics.identify(this.value, {}, (response) => showSuccessModal({ event: 'identify-newsletter-contact' }, response));">
+            <button class="normal" onclick="cioanalytics.track('newsletter-signup', {}, (response) => showSuccessModal({ event: 'newsletter-signup' }, response));">Sign Up</button>
         </div>
     </section>
 
@@ -114,9 +125,10 @@
         <div class="col">
             <img class="logo" src="images/logo.png" alt="">
             <h4>Contact</h4>
-            <p><strong>Address:</strong> Lahore, Pakistan - 54840</p>
-            <p><strong>Phone:</strong> +92-321-4655990</p>
-            <p><strong>Hours:</strong> 10:00 - 18:00, Mon - Sat</p>
+            <p><strong>Address:</strong> Av. Corrientes 1234, C1043AAN, Buenos Aires, Argentina</p>
+            <p><strong>Phone:</strong> +54 11 4321-5678</p>
+            <p><strong>Email:</strong> info@bairescompany.com.ar</p>
+            <p><strong>Hours:</strong> 9:00 - 18:00, Mon - Fri</p>
             <div class="follow">
                 <h4>Follow us</h4>
                 <div class="icon">
