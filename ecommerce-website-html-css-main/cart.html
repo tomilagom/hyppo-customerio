@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>e-commerce website</title>
+
+    <!-- font-awesome cdn link -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+
+    <!-- custom css file link -->
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <section id="header">
+        <a href="#"><img src="images/logo.png" class="logo" alt=""></a>
+        <div>
+            <ul id="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="shop.html">Shop</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li id="lg-bag"><a class="active" href="cart.html"><i class="far fa-shopping-bag"></i></a></li>
+                <a href="#" id="close"><i class="far fa-times"></i></a>
+            </ul>
+        </div>
+        <div id="mobile">
+            <a href="cart.html"><i class="far fa-shopping-bag"></i></a>
+            <i id="bar" class="fas fa-outdent"></i>
+        </div>
+    </section>
+
+    <section id="page-header" class="about-header">
+        <h2>#cart</h2>
+        <p>Add your coupon code & SAVE upto 70%!</p>
+    </section>
+
+    <section id="cart" class="section-p1">
+        <table width="100%">
+            <thead>
+                <tr>
+                    <td>Remove</td>
+                    <td>Image</td>
+                    <td>Product</td>
+                    <td>Price</td>
+                    <td>Quantity</td>
+                    <td>Subtotal</td>
+                </tr>
+            </thead>
+            <tbody id="cart-body">
+                <!-- Cart items will be rendered here by JS -->
+            </tbody>
+        </table>
+    </section>
+
+    <section id="cart-add" class="section-p1">
+        <div class="coupon">
+            <h3>Apply Coupon</h3>
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <input type="text" placeholder="Enter Your Coupon">
+                <button class="normal">Apply</button>
+                <button id="remove-coupon" class="normal" style="display:none;background:#e74c3c;color:#fff;">Remove</button>
+            </div>
+        </div>
+        <div class="subtotal">
+            <h3>Cart Totals</h3>
+            <table>
+                <tr>
+                    <td>Cart Subtotal</td>
+                    <td id="cart-subtotal">$ 335</td>
+                </tr>
+                <tr>
+                    <td>Shipping</td>
+                    <td>Free</td>
+                </tr>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td><strong id="cart-total">$ 335</strong></td>
+                </tr>
+            </table>
+            <div id="coupon-details-container"></div>
+            <button class="normal" id="checkout-btn">Proceed to checkout</button>
+            <div id="login-modal" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.4);z-index:1000;align-items:center;justify-content:center;">
+                <form id="login-form" style="background:#fff;padding:2rem 2.5rem;border-radius:10px;box-shadow:0 2px 16px rgba(0,0,0,0.15);display:flex;flex-direction:column;gap:1rem;min-width:300px;max-width:90vw;">
+                    <h4 style="margin:0;text-align:center;">Login Required</h4>
+                    <label>Email:<input type="email" id="login-email" required style="width:100%;padding:0.5rem;margin-top:0.3rem;"></label>
+                    <label>Password:<input type="password" id="login-password" required style="width:100%;padding:0.5rem;margin-top:0.3rem;"></label>
+                    <button type="submit" class="normal">Login</button>
+                </form>
+            </div>
+            <div id="user-greeting" style="margin-top:1rem;display:none;"></div>
+            <button id="logout-btn" class="normal" style="display:none;margin-top:0.5rem;background:#e74c3c;color:#fff;">Logout</button>
+        </div>
+    </section>
+
+    <footer class="section-p1">
+        <div class="col">
+            <img class="logo" src="images/logo.png" alt="">
+            <h4>Contact</h4>
+            <p><strong>Address:</strong> Lahore, Pakistan - 54840</p>
+            <p><strong>Phone:</strong> +92-321-4655990</p>
+            <p><strong>Hours:</strong> 10:00 - 18:00, Mon - Sat</p>
+            <div class="follow">
+                <h4>Follow us</h4>
+                <div class="icon">
+                    <i class="fab fa-facebook-f"></i>
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-pinterest-p"></i>
+                    <i class="fab fa-youtube"></i>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <h4>About</h4>
+            <a href="#">About us</a>
+            <a href="#">Delivery Information</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms & Conditions</a>
+            <a href="#">Contact Us</a>
+        </div>
+        <div class="col">
+            <h4>My Account</h4>
+            <a href="#">Sign In</a>
+            <a href="#">View Cart</a>
+            <a href="#">My Wishlist</a>
+            <a href="#">Track My Order</a>
+            <a href="#">Help</a>
+        </div>
+        <div class="col install">
+            <h4>Install App</h4>
+            <p>From App Store or Google Play</p>
+            <div class="row">
+                <img src="images/pay/app.jpg" alt="">
+                <img src="images/pay/play.jpg" alt="">
+            </div>
+            <p>Secured Payment Gateway</p>
+            <img src="images/pay/pay.png" alt="">
+        </div>
+        <div class="copyright">
+            <p>Created By Muhammad Awais | All Rights Reserved | &#169; 2023</p>
+        </div>
+    </footer>
+
+    <!-- javascript script file link -->
+    <script src="script.js"></script>
+    <script>
+        // --- CART PAGE FUNCTIONALITY ---
+        function getCart() {
+            return JSON.parse(localStorage.getItem('cart') || '[]');
+        }
+        function setCart(cart) {
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+        function renderCart() {
+            const cart = getCart();
+            const tbody = document.getElementById('cart-body');
+            if (!tbody) return;
+            tbody.innerHTML = '';
+            let subtotal = 0;
+            cart.forEach((item, idx) => {
+                const tr = document.createElement('tr');
+                const itemSubtotal = item.price * item.qty;
+                subtotal += itemSubtotal;
+                tr.innerHTML = `
+                    <td><a href="#" class="remove-item" data-idx="${idx}"><i class="fas fa-times-circle" style="color:black"></i></a></td>
+                    <td><img src="${item.img}" alt=""></td>
+                    <td>${item.name}</td>
+                    <td>$${item.price.toFixed(2)}</td>
+                    <td><input type="number" min="1" value="${item.qty}" class="qty-input" data-idx="${idx}"></td>
+                    <td>$${itemSubtotal.toFixed(2)}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+            // Coupon logic
+            let discount = 0;
+            let couponText = '';
+            const couponInput = document.querySelector('.coupon input');
+            const removeBtn = document.getElementById('remove-coupon');
+            if (couponInput && couponInput.value.trim() !== '') {
+                discount = 5;
+                couponText = couponInput.value.trim();
+                if (removeBtn) removeBtn.style.display = '';
+            } else {
+                if (removeBtn) removeBtn.style.display = 'none';
+            }
+            // Update totals
+            document.getElementById('cart-subtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('cart-total').textContent = `$${(subtotal - discount >= 0 ? subtotal - discount : 0).toFixed(2)}`;
+            // Show coupon details in a new table above the checkout button if applied
+            const couponDetailsContainer = document.getElementById('coupon-details-container');
+            if (discount > 0) {
+                couponDetailsContainer.innerHTML = `
+                    <table style="margin:1rem 0;width:100%;background:#f8f8f8;border-radius:6px;">
+                        <tr>
+                            <td style="font-weight:bold;">Coupon Applied:</td>
+                            <td>${couponText}</td>
+                        </tr>
+                        <tr>
+                            <td style="font-weight:bold;">Discount:</td>
+                            <td style="color:green;">- $${discount.toFixed(2)}</td>
+                        </tr>
+                    </table>
+                `;
+            } else {
+                couponDetailsContainer.innerHTML = '';
+            }
+        }
+        function isLoggedIn() {
+            return !!localStorage.getItem('cart_user_email');
+        }
+        function getUserEmail() {
+            return localStorage.getItem('cart_user_email') || '';
+        }
+        function showGreeting() {
+            const greeting = document.getElementById('user-greeting');
+            const logoutBtn = document.getElementById('logout-btn');
+            if (isLoggedIn()) {
+                greeting.textContent = `Logged in as: ${getUserEmail()}`;
+                greeting.style.display = '';
+                if (logoutBtn) logoutBtn.style.display = '';
+            } else {
+                greeting.style.display = 'none';
+                if (logoutBtn) logoutBtn.style.display = 'none';
+            }
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCart();
+            showGreeting();
+            // Remove item
+            document.getElementById('cart-body').addEventListener('click', function(e) {
+                if (e.target.closest('.remove-item')) {
+                    e.preventDefault();
+                    const idx = +e.target.closest('.remove-item').getAttribute('data-idx');
+                    let cart = getCart();
+                    cart.splice(idx, 1);
+                    setCart(cart);
+                    renderCart();
+                }
+            });
+            // Change quantity
+            document.getElementById('cart-body').addEventListener('input', function(e) {
+                if (e.target.classList.contains('qty-input')) {
+                    const idx = +e.target.getAttribute('data-idx');
+                    let cart = getCart();
+                    let val = parseInt(e.target.value);
+                    if (val < 1 || isNaN(val)) val = 1;
+                    cart[idx].qty = val;
+                    setCart(cart);
+                    renderCart();
+                }
+            });
+            // Apply coupon
+            const couponInput = document.querySelector('.coupon input');
+            const couponButton = document.querySelector('.coupon button');
+            const removeBtn = document.getElementById('remove-coupon');
+            couponButton.addEventListener('click', function() {
+                renderCart();
+                if (couponInput.value.trim() !== '') {
+                    alert('Coupon applied! $5 discount added.');
+                } else {
+                    alert('Coupon removed.');
+                }
+            });
+            if (removeBtn) {
+                removeBtn.addEventListener('click', function() {
+                    couponInput.value = '';
+                    renderCart();
+                    alert('Coupon removed.');
+                });
+            }
+            // Allow removing coupon by clearing input and clicking Apply
+            couponInput.addEventListener('input', function() {
+                if (couponInput.value.trim() === '') {
+                    renderCart();
+                }
+            });
+            // Checkout button logic
+            document.getElementById('checkout-btn').addEventListener('click', function(e) {
+                if (!isLoggedIn()) {
+                    e.preventDefault();
+                    document.getElementById('login-modal').style.display = 'flex';
+                } else {
+                    alert('Proceeding to checkout! (Demo only)');
+                }
+            });
+            // Login form logic
+            document.getElementById('login-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const email = document.getElementById('login-email').value;
+                // Password is ignored, always valid
+                localStorage.setItem('cart_user_email', email);
+                document.getElementById('login-modal').style.display = 'none';
+                showGreeting();
+                alert('Login successful! You can now checkout.');
+            });
+            // Logout button logic
+            document.getElementById('logout-btn').addEventListener('click', function() {
+                localStorage.removeItem('cart_user_email');
+                showGreeting();
+                alert('You have been logged out.');
+            });
+            // Hide modal on outside click
+            document.getElementById('login-modal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    this.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
