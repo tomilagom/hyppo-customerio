@@ -13,3 +13,14 @@ if (close) {
         nav.classList.remove('active');
     })
 }
+
+function getCart() {
+    return JSON.parse(localStorage.getItem('cart') || '[]');
+}
+function updateCartCount() {
+    const cart = getCart();
+    const count = cart.reduce((sum, item) => sum + item.qty, 0);
+    const el = document.getElementById('cart-count');
+    if (el) el.textContent = count;
+}
+document.addEventListener('DOMContentLoaded', updateCartCount);
