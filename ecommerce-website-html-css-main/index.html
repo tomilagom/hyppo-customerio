@@ -51,7 +51,7 @@
         <h2>Super value deals</h2>
         <h1>On all products</h1>
         <p>Save more with coupons & up to 70% off!</p>
-        <button onclick="cioanalytics.track('shop-now', {}, (response) => showSuccessModal({ event: 'shop-now' }, response));">Shop Now</button>
+        <button onclick="cioanalytics.track('shop-now', {}, (response) => showSuccessModal({ event: 'shop-now' }, response)); window.location.hash = 'product1';">Shop Now</button>
     </section>
 
        <section id="newsletter" class="section-p1 section-m1">
